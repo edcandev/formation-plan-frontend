@@ -4,7 +4,7 @@ import App from './App.tsx'
 //import './index.css'
 //import './custom-styles.css'
 import UploadComponent from './components/UploadComponent.tsx'
-import PlanPreviewComponent from './components/PlanPreviewComponent.tsx'
+import PlanPreviewComponent from './components/PlanGeneratorComponent.tsx'
 import PlanDownloadComponent from './components/PlanDownloadComponent.tsx'
 import HeaderComponent from './components/HeaderComponent.tsx'
 

@@ -13,6 +13,7 @@ export type StudentExcelResponse = {
     firstSurname : string,
     lastSurname : string,
     name : string,
+    fileName : string,
     ieMentor : string,
     subjectList : Array<Subject>,
 

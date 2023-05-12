@@ -1,20 +1,22 @@
 import HeaderComponent from './components/HeaderComponent';
 import UploadComponent from './components/UploadComponent';
-import PlanPreviewComponent from './components/PlanPreviewComponent';
+import PlanPreviewComponent from './components/PlanGeneratorComponent';
 import { useState } from 'react';
 import PlanDownloadComponent from './components/PlanDownloadComponent';
 
-import HandlerFuction, { UploadComponentResponse } from './types';
+import { UploadComponentResponse } from './types';
 
 
 function App() {
 
   const [currentComponent, setCurrentComponent] = useState<UploadComponentResponse>({ currentComponent: 0 });
 
-  const handleCurrentComponentChange = (cc : UploadComponentResponse) : UploadComponentResponse => {
+  const handlePlanPreviewRender = (cc : UploadComponentResponse) : UploadComponentResponse => {
     setCurrentComponent(cc);
     return cc;
   }
+
+  
 
 
 
@@ -27,7 +29,6 @@ function App() {
       case 2:
         return(
           <>
-            <PlanPreviewComponent/>
             <PlanDownloadComponent/>
           </>
         )
@@ -38,7 +39,7 @@ function App() {
   return (
     <>
       <HeaderComponent />
-      <UploadComponent handleChange={handleCurrentComponentChange}/>
+      <UploadComponent handleChange={handlePlanPreviewRender}/>
       {
         renderCurrentState()
       }
