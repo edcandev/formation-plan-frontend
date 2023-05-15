@@ -24,3 +24,10 @@ export type Subject = {
     period : string,
     partial : string
 }
+
+export type PlanGenerationRequestBody = {
+    studentId: string,
+    studentFileName : string,
+    generationDateString: string,
+    period : string
+}
