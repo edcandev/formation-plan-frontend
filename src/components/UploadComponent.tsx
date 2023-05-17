@@ -65,7 +65,7 @@ const handleSelect = ():void=> {
 const UploadComponent = ( {handleChange} : Props  ) => {
 
   return (
-    <div className="container bg-success p-4 main-container">
+    <div className="container p-4 main-container">
       
       <label htmlFor="select-mentor">Mentor:</label>
       <select name="select-mentor" id="select-mentor" onClick={

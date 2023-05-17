@@ -8,27 +8,29 @@ const PlanPreviewComponent = ({studentExcelData} : Props) => {
 
 
   return (
-    <>
+    <div className='mx-4'>
         <h2>Asignaturas Registradas:</h2>
         <p><strong>Alumno:</strong> {studentExcelData?.firstSurname} {studentExcelData?.lastSurname} {studentExcelData?.name}</p>
         <p><strong>Matrícula:</strong> {studentExcelData?.studentId}</p>
 
-        <table>
+        <table className='table table-hover'>
             <thead>
                 <tr>
                     <th>Clave de materia</th>
                     <th>Periodo</th>
                     <th>Parciales</th>
+                    <th>Válida</th>
                 </tr>
             </thead>
             <tbody>
                 {
                     studentExcelData?.subjectList.map((subject)=>{
                         return(
-                        <tr key={subject.subjectId}>
+                        <tr key={subject.subjectId} className={subject.valid ? 'bg-success' : 'bg-danger'}>
                             <td>{subject.subjectId}</td>
                             <td>{subject.period}</td>
                             <td>{subject.partial}</td>
+                            <td>{subject.valid ? 'Sí' : 'No'}</td>
                         </tr>   
                         )
                     })
@@ -44,7 +46,7 @@ const PlanPreviewComponent = ({studentExcelData} : Props) => {
             <input type="submit" value="Generar plan de formación" />
 
         </form>
-    </>
+    </div>
   )
 }
 

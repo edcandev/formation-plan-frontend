@@ -20,9 +20,10 @@ export type StudentExcelResponse = {
 }
 
 export type Subject = {
-    subjectId : string,
-    period : string,
-    partial : string
+    subjectId: string,
+    period: string,
+    partial: string,
+    valid: boolean
 }
 
 export type PlanGenerationRequestBody = {
