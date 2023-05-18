@@ -3,9 +3,15 @@ export type HandlerFuction = {
     handleChange: ( cc : number) => void
 }
 
-export type UploadComponentResponse = {
+export type ComponentResponse = {
     currentComponent : number,
-    response? : StudentExcelResponse
+    response? : StudentExcelResponse | PlanGeneratorResponse
+}
+
+export type PlanGeneratorResponse = {
+    wasGenerated : boolean,
+    fileName: string,
+    studentId: string
 }
 
 export type StudentExcelResponse = {

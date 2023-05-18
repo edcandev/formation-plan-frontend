@@ -1,10 +1,11 @@
-import { PlanGenerationRequestBody, StudentExcelResponse } from '../types'
+import { PlanGenerationRequestBody, StudentExcelResponse, ComponentResponse, PlanGeneratorResponse } from '../types'
 
 type Props = {
-    studentExcelData? : StudentExcelResponse
+    studentExcelData? : StudentExcelResponse,
+    handleChange: ( cc : ComponentResponse) => ComponentResponse
 }
 
-const PlanPreviewComponent = ({studentExcelData} : Props) => {
+const PlanPreviewComponent = ({studentExcelData, handleChange} : Props) => {
 
 
   return (
@@ -38,7 +39,7 @@ const PlanPreviewComponent = ({studentExcelData} : Props) => {
                 
             </tbody>
         </table>
-        <form onSubmit={e => handlePlanGeneration(e, studentExcelData!)}>
+        <form onSubmit={e => handlePlanGeneration(e, studentExcelData!, handleChange)}>
             <label htmlFor="generation-date-input">Fecha de creación del plan de formación:</label>
             <input required type="date" className='generation-date-input' name='generation-date-input'/>
             <label htmlFor="period-input">Periodo:</label>
@@ -50,7 +51,7 @@ const PlanPreviewComponent = ({studentExcelData} : Props) => {
   )
 }
 
-const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, studentExcelData: StudentExcelResponse) => {
+const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, studentExcelData: StudentExcelResponse, handleChange : ( cc : ComponentResponse) => ComponentResponse ) => {
     ev.preventDefault();
     // Petición de tipo  GET
 
@@ -68,17 +69,10 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
         return;
     }
 
-    //let date = new Date(generationDateInput.value).toLocaleDateString('en-GB');
-    //const dateArr = date.split('/')
-
-    //const date = new Date(generationDateInput.value)
-    
-    //console.log(generationDateInput.value);
-    
-    //console.log(date.getUTCDate());
-
-    //console.log(date);
-    
+    if(! studentExcelData.subjectList.every( subject => subject.valid)) {
+        alert('La cédula no es válida')
+        return;
+    }
 
     const reqBody : PlanGenerationRequestBody = {
         studentId : studentExcelData.studentId,
@@ -86,8 +80,6 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
         generationDateString: formatDate(generationDateInput.value),
         period: periodInput.value
     }
-    console.log(reqBody);
-
 
     const response = await fetch('http://localhost:8080/generatePlan',
     {
@@ -97,9 +89,35 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
             'Content-Type': 'application/json'
         }
         
-    })
-    response.json().then(data => console.log(data))
+    });
 
+    let responseData : PlanGeneratorResponse;
+    response.json().then(data => {
+        responseData = data;
+
+        const planGeneratorResponse : PlanGeneratorResponse = {
+            wasGenerated: responseData.wasGenerated,
+            fileName: studentExcelData.fileName,
+            studentId: studentExcelData.studentId
+        }
+        
+        console.log(planGeneratorResponse);
+
+        if(! planGeneratorResponse.wasGenerated) {
+            alert('PLan no generado, erro en la cédula')
+            return;
+        }
+
+        
+        handleChange({
+            currentComponent: 2,
+            response: planGeneratorResponse
+        })
+
+    });
+
+
+    
 }
 
 const formatDate = ( localeDate : string ) : string => {

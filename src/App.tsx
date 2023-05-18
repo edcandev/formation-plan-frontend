@@ -4,14 +4,14 @@ import PlanPreviewComponent from './components/PlanGeneratorComponent';
 import { useState } from 'react';
 import PlanDownloadComponent from './components/PlanDownloadComponent';
 
-import { UploadComponentResponse } from './types';
+import { StudentExcelResponse, ComponentResponse, PlanGeneratorResponse } from './types';
 
 
 function App() {
 
-  const [currentComponent, setCurrentComponent] = useState<UploadComponentResponse>({ currentComponent: 0 });
+  const [currentComponent, setCurrentComponent] = useState<ComponentResponse>({ currentComponent: 0 });
 
-  const handlePlanPreviewRender = (cc : UploadComponentResponse) : UploadComponentResponse => {
+  const handlePlanPreviewRender = (cc : ComponentResponse) : ComponentResponse => {
     setCurrentComponent(cc);
     return cc;
   }
@@ -23,23 +23,31 @@ function App() {
   const renderCurrentState = () : JSX.Element | void =>  {
 
     switch(currentComponent.currentComponent) {
+
+
+      case 0:
+        return(
+          <UploadComponent handleChange={handlePlanPreviewRender}/>
+        )
+
       case 1:
-        return( <PlanPreviewComponent studentExcelData={currentComponent.response}/>)
-        break;
+        return( 
+          <>
+                <UploadComponent handleChange={handlePlanPreviewRender}/>
+                <PlanPreviewComponent studentExcelData={currentComponent.response as StudentExcelResponse} handleChange={handlePlanPreviewRender}/>)
+          </>)
       case 2:
         return(
           <>
-            <PlanDownloadComponent/>
+            <PlanDownloadComponent planGeneratorResponse={currentComponent.response as PlanGeneratorResponse} handleChange={handlePlanPreviewRender}/>
           </>
         )
-        break;
     }
   }
 
   return (
     <>
       <HeaderComponent />
-      <UploadComponent handleChange={handlePlanPreviewRender}/>
       {
         renderCurrentState()
       }

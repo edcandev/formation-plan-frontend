@@ -1,9 +1,9 @@
 import React from 'react'
-import { StudentExcelResponse, UploadComponentResponse } from '../types'
+import { StudentExcelResponse, ComponentResponse } from '../types'
 
 
 type Props = {
-  handleChange: ( cc : UploadComponentResponse) => UploadComponentResponse
+  handleChange: ( cc : ComponentResponse) => ComponentResponse
 }
 
 
@@ -37,7 +37,7 @@ async function uploadFile({handleChange} : Props) : Promise<void> {
           .then(data => {
             const response : StudentExcelResponse = data;
 
-            const componentResponse : UploadComponentResponse = {
+            const componentResponse : ComponentResponse = {
               currentComponent: 1,
               response: response
             }
@@ -68,18 +68,21 @@ const UploadComponent = ( {handleChange} : Props  ) => {
     <div className="container p-4 main-container">
       
       <label htmlFor="select-mentor">Mentor:</label>
-      <select name="select-mentor" id="select-mentor" onClick={
+      <select className='form-select my-3'  name="select-mentor" id="select-mentor" onClick={
         (e) => {
-          handleSelect(e)
+          handleSelect()
         }} >
         <option value="disabled">Seleccionar mentor</option>
         <option value="mentor-1">Mentor 1</option>
         <option value="mentor-2">Mentor 2</option>
+        <option value="mentor-2">Mentor 3</option>
+        <option value="mentor-2">Mentor 4</option>
+        <option value="mentor-2">Mentor 5</option>
       </select>
 
-      <input className='d-flex mb-3 w-100 align-items-center file-input'  
+      <input className='d-flex mb-3 w-100 align-items-center file-input form-input'  
       id="fileupload" type="file" name="fileupload" accept='.xls,.xlsx'/>
-      <button id="upload-button" onClick={() => uploadFile({handleChange})
+      <button className='btn btn-primary' id="upload-button" onClick={() => uploadFile({handleChange})
       }> Subir </button>
     </div>
   )
