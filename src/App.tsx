@@ -34,7 +34,7 @@ function App() {
         return( 
           <>
                 <UploadComponent handleChange={handlePlanPreviewRender}/>
-                <PlanPreviewComponent studentExcelData={currentComponent.response as StudentExcelResponse} handleChange={handlePlanPreviewRender}/>)
+                <PlanPreviewComponent studentExcelData={currentComponent.response as StudentExcelResponse} handleChange={handlePlanPreviewRender}/>
           </>)
       case 2:
         return(

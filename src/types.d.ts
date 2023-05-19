@@ -27,6 +27,7 @@ export type StudentExcelResponse = {
 
 export type Subject = {
     subjectId: string,
+    subjectName: string,
     period: string,
     partial: string,
     valid: boolean

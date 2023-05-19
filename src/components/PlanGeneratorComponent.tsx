@@ -11,13 +11,14 @@ const PlanPreviewComponent = ({studentExcelData, handleChange} : Props) => {
   return (
     <div className='mx-4'>
         <h2>Asignaturas Registradas:</h2>
-        <p><strong>Alumno:</strong> {studentExcelData?.firstSurname} {studentExcelData?.lastSurname} {studentExcelData?.name}</p>
+        <p><strong>Alumno:</strong> {studentExcelData?.firstSurname}{' '}{studentExcelData?.lastSurname} {studentExcelData?.name}</p>
         <p><strong>Matrícula:</strong> {studentExcelData?.studentId}</p>
 
         <table className='table table-hover'>
-            <thead>
-                <tr>
-                    <th>Clave de materia</th>
+            <thead className=''>
+                <tr >
+                    <th className='col-2'>Clave de materia</th>
+                    <th className='text-center'>Nombre de materia</th>
                     <th>Periodo</th>
                     <th>Parciales</th>
                     <th>Válida</th>
@@ -28,7 +29,8 @@ const PlanPreviewComponent = ({studentExcelData, handleChange} : Props) => {
                     studentExcelData?.subjectList.map((subject)=>{
                         return(
                         <tr key={subject.subjectId} className={subject.valid ? 'bg-success' : 'bg-danger'}>
-                            <td>{subject.subjectId}</td>
+                            <td className='col-2'>{subject.subjectId}</td>
+                            <td>{subject.subjectName}</td>
                             <td>{subject.period}</td>
                             <td>{subject.partial}</td>
                             <td>{subject.valid ? 'Sí' : 'No'}</td>
@@ -45,10 +47,9 @@ const PlanPreviewComponent = ({studentExcelData, handleChange} : Props) => {
             <label htmlFor="period-input">Periodo:</label>
             <input required type="text" name="period-input" className="period-input"/>
             <input type="submit" value="Generar plan de formación" />
-
         </form>
     </div>
-  )
+    )
 }
 
 const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, studentExcelData: StudentExcelResponse, handleChange : ( cc : ComponentResponse) => ComponentResponse ) => {
@@ -59,15 +60,6 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
     const periodInput : HTMLInputElement = document.querySelector('.period-input')!;
 
     // console.log(generationDateInput.value);
-
-    if(generationDateInput.value == '' || generationDateInput.value == undefined) {
-        alert('Ingresar una fecha...')
-        return;
-    }
-    if(periodInput.value == '' || periodInput.value == undefined) {
-        alert('Ingresar el periodo...')
-        return;
-    }
 
     if(! studentExcelData.subjectList.every( subject => subject.valid)) {
         alert('La cédula no es válida')
@@ -80,6 +72,9 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
         generationDateString: formatDate(generationDateInput.value),
         period: periodInput.value
     }
+
+    /*  Handle await component*/
+    alert('Generando plan de formación...')
 
     const response = await fetch('http://localhost:8080/generatePlan',
     {
