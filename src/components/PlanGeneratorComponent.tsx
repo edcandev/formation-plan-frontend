@@ -1,5 +1,8 @@
 import { PlanGenerationRequestBody, StudentExcelResponse, ComponentResponse, PlanGeneratorResponse } from '../types'
 
+const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
+
+
 type Props = {
     studentExcelData? : StudentExcelResponse,
     handleChange: ( cc : ComponentResponse) => ComponentResponse
@@ -76,7 +79,7 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
     /*  Handle await component*/
     alert('Generando plan de formación...')
 
-    const response = await fetch('http://localhost:8080/generatePlan',
+    const response = await fetch(  `${ACI_URL}:8080/generatePlan`,
     {
         method: 'POST',
         body: JSON.stringify(reqBody),
@@ -102,7 +105,6 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
             alert('PLan no generado, erro en la cédula')
             return;
         }
-
         
         handleChange({
             currentComponent: 2,

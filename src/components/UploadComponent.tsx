@@ -1,11 +1,12 @@
-import React from 'react'
-import { StudentExcelResponse, ComponentResponse } from '../types'
+import { useEffect, useState } from 'react';
+import { StudentExcelResponse, ComponentResponse, IEMentor } from '../types'
+
+const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
 
 
 type Props = {
   handleChange: ( cc : ComponentResponse) => ComponentResponse
 }
-
 
 
 async function uploadFile({handleChange} : Props) : Promise<void> {
@@ -25,8 +26,10 @@ async function uploadFile({handleChange} : Props) : Promise<void> {
       const formData : FormData = new FormData(); 
       formData.append("file", selectedFile);
       formData.append('mentor',mentorSelectElement!.value);
+
+      const urlLink = `${ACI_URL}:8080/uploadFile`;
   
-      const response = await fetch('http://localhost:8080/uploadFile',
+      const response = await fetch(urlLink,
       {
         method: "POST", 
         body: formData // Incluye el archivo y el mentor seleccionado
@@ -57,12 +60,33 @@ async function uploadFile({handleChange} : Props) : Promise<void> {
   }
 }
 
+async function getMentors() : Promise<IEMentor[]> {
+
+  let responseData : Array<IEMentor>
+
+  console.log("asu");
+  const response = await fetch('http://localhost:8080/getMentors');
+  
+  
+  const data = await response.json()
+
+  responseData = await data
+
+}
+
 const handleSelect = ():void=> {
   const optionDisabled = document.querySelector('option');
   optionDisabled!.disabled = true;
 }
 
 const UploadComponent = ( {handleChange} : Props  ) => {
+
+  const [mentors, setMentors] = useState<Array<IEMentor>>([])
+
+
+  useEffect(()=> {
+    console.log(getMentors());
+  },[])
 
   return (
     <div className="container p-4 main-container">
@@ -72,6 +96,7 @@ const UploadComponent = ( {handleChange} : Props  ) => {
         (e) => {
           handleSelect()
         }} >
+          {}
         <option value="disabled">Seleccionar mentor</option>
         <option value="mentor-1">Mentor 1</option>
         <option value="mentor-2">Mentor 2</option>
@@ -87,6 +112,7 @@ const UploadComponent = ( {handleChange} : Props  ) => {
     </div>
   )
 }
+
 
 
 export default UploadComponent

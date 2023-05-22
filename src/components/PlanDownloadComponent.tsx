@@ -1,5 +1,8 @@
 import { ComponentResponse, PlanGeneratorResponse } from '../types'
 
+const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
+
+
 type Props = {
   planGeneratorResponse? : PlanGeneratorResponse,
   handleChange: ( cc : ComponentResponse) => ComponentResponse
@@ -13,7 +16,7 @@ const PlanDownloadComponent = ({planGeneratorResponse, handleChange} : Props) =>
   }
 
   const getCompleteDownloadLink = () => {
-    return `http://localhost:8080/downloadPlan/${planGeneratorResponse?.studentId}.zip`
+    return `${ACI_URL}:8080/downloadPlan/${planGeneratorResponse?.studentId}.zip`
   }
 
   return (

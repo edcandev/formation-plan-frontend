@@ -39,3 +39,8 @@ export type PlanGenerationRequestBody = {
     generationDateString: string,
     period : string
 }
+
+export interface IEMentor {
+    fullName: string,
+    studentsIds: Set<string>
+}
