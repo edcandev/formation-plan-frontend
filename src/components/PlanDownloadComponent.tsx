@@ -32,8 +32,4 @@ const PlanDownloadComponent = ({planGeneratorResponse, handleChange} : Props) =>
 }
 
 
-const handlePlanDownload = () => {
-
-}
-
 export default PlanDownloadComponent

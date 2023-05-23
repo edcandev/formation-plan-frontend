@@ -1,90 +1,30 @@
-import { useEffect, useState } from 'react';
-import { StudentExcelResponse, ComponentResponse } from '../types'
+import {  ComponentResponse } from '../types'
 import useFetch from '../hooks/useFetch';
+import useUploadFile from '../hooks/useUploadFile';
 
 //const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
-
-const ACI_URL = 'http://localhost'
 
 type Props = {
   handleChange: ( cc : ComponentResponse) => ComponentResponse
 }
 
 
-async function uploadFile({handleChange} : Props) : Promise<void> {
-
-  const fileupload = document.querySelector<HTMLInputElement>('#fileupload');
-
-  const mentorSelectElement = document.querySelector<HTMLSelectElement>('#select-mentor');
-   // console.log(mentorSelectElement!.value);
-
-  let selectedFile;
-  // console.log(fileupload?.files);
-
-  if(mentorSelectElement?.value != 'disabled') {
-
-    if(fileupload?.files?.length != 0 && fileupload?.files != null) {
-      selectedFile = fileupload.files[0]
-      const formData : FormData = new FormData(); 
-      formData.append("file", selectedFile);
-      formData.append('mentor',mentorSelectElement!.value);
-
-      const urlLink = `${ACI_URL}:8080/uploadFile`;
-  
-      const response = await fetch(urlLink,
-      {
-        method: "POST", 
-        body: formData // Incluye el archivo y el mentor seleccionado
-      })
-      
-      if (response.status == 200) {
-        response.json()
-          .then(data => {
-
-            const response : StudentExcelResponse = data;
-            const componentResponse : ComponentResponse = {
-              currentComponent: 1,
-              response: response
-            }
-
-            handleChange(componentResponse);
-
-          });
-        alert('El archivo ha sido cargado');
-      }
-      if(response.status == 403) {
-        alert('El mentor no puede generar el plan del alumno')
-      }
-    } else {
-        console.log("No hay archivo");
-        alert("Por favor, seleccione un archivo.");
-    }
-
-  } else {
-    alert('Por favor, seleccione un mentor.')
-  }
-}
-
-
-
-const UploadComponent = ( {handleChange} : Props  ) => {
+const UploadComponent = ( {handleChange } : Props  ) => {
 
   const { mentors } = useFetch();
+  const { uploadFile } = useUploadFile();
 
   const handleSelect = ():void=> {
     const optionDisabled = document.querySelector('option');
     optionDisabled!.disabled = true;
   }
 
-
   return (
     <div className="container p-4 main-container">
       
       <label htmlFor="select-mentor">Mentor:</label>
       <select className='form-select my-3'  name="select-mentor" id="select-mentor" onClick={
-        (e) => {
-          handleSelect()
-        }} >
+        () => { handleSelect()}} >
         <option value="disabled">Seleccionar mentor</option>
 
         {mentors.map(mentor =>(
