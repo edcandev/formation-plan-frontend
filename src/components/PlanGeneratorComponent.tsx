@@ -1,7 +1,8 @@
 import { PlanGenerationRequestBody, StudentExcelResponse, ComponentResponse, PlanGeneratorResponse } from '../types'
 
-const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
+// const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
 
+const ACI_URL = 'http://localhost'
 
 type Props = {
     studentExcelData? : StudentExcelResponse,

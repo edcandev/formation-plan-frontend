@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { StudentExcelResponse, ComponentResponse, IEMentor } from '../types'
+import { StudentExcelResponse, ComponentResponse } from '../types'
+import useFetch from '../hooks/useFetch';
 
-const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
+//const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
 
+const ACI_URL = 'http://localhost'
 
 type Props = {
   handleChange: ( cc : ComponentResponse) => ComponentResponse
@@ -38,8 +40,8 @@ async function uploadFile({handleChange} : Props) : Promise<void> {
       if (response.status == 200) {
         response.json()
           .then(data => {
-            const response : StudentExcelResponse = data;
 
+            const response : StudentExcelResponse = data;
             const componentResponse : ComponentResponse = {
               currentComponent: 1,
               response: response
@@ -48,7 +50,10 @@ async function uploadFile({handleChange} : Props) : Promise<void> {
             handleChange(componentResponse);
 
           });
-        alert("El archivo ha sido cargado");
+        alert('El archivo ha sido cargado');
+      }
+      if(response.status == 403) {
+        alert('El mentor no puede generar el plan del alumno')
       }
     } else {
         console.log("No hay archivo");
@@ -60,33 +65,17 @@ async function uploadFile({handleChange} : Props) : Promise<void> {
   }
 }
 
-async function getMentors() : Promise<IEMentor[]> {
 
-  let responseData : Array<IEMentor>
-
-  console.log("asu");
-  const response = await fetch('http://localhost:8080/getMentors');
-  
-  
-  const data = await response.json()
-
-  responseData = await data
-
-}
-
-const handleSelect = ():void=> {
-  const optionDisabled = document.querySelector('option');
-  optionDisabled!.disabled = true;
-}
 
 const UploadComponent = ( {handleChange} : Props  ) => {
 
-  const [mentors, setMentors] = useState<Array<IEMentor>>([])
+  const { mentors } = useFetch();
 
+  const handleSelect = ():void=> {
+    const optionDisabled = document.querySelector('option');
+    optionDisabled!.disabled = true;
+  }
 
-  useEffect(()=> {
-    console.log(getMentors());
-  },[])
 
   return (
     <div className="container p-4 main-container">
@@ -96,23 +85,19 @@ const UploadComponent = ( {handleChange} : Props  ) => {
         (e) => {
           handleSelect()
         }} >
-          {}
         <option value="disabled">Seleccionar mentor</option>
-        <option value="mentor-1">Mentor 1</option>
-        <option value="mentor-2">Mentor 2</option>
-        <option value="mentor-2">Mentor 3</option>
-        <option value="mentor-2">Mentor 4</option>
-        <option value="mentor-2">Mentor 5</option>
+
+        {mentors.map(mentor =>(
+          <option key={mentor.fullName} value={mentor.fullName}>{mentor.fullName}</option>
+        ))}
       </select>
 
       <input className='d-flex mb-3 w-100 align-items-center file-input form-input'  
       id="fileupload" type="file" name="fileupload" accept='.xls,.xlsx'/>
       <button className='btn btn-primary' id="upload-button" onClick={() => uploadFile({handleChange})
-      }> Subir </button>
+      }>Subir</button>
     </div>
   )
 }
-
-
 
 export default UploadComponent
