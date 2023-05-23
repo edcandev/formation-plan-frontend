@@ -1,6 +1,6 @@
 import { ComponentResponse, StudentExcelResponse } from "../types";
 
-const ACI_URL = 'http://localhost'
+const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
 
 type Props = {
     handleChange: ( cc : ComponentResponse) => ComponentResponse

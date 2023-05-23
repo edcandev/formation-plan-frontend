@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { IEMentor } from "../types";
 
+
+const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
+//const ACI_URL = 'http://localhost'
 const useFetch = () => {
 
     const [mentors, setMentors] = useState<Array<IEMentor>>([])
@@ -9,7 +12,7 @@ const useFetch = () => {
         
         let fetchedMentors : Array<IEMentor>;
         
-        fetch('http://localhost:8080/getMentors')
+        fetch(`${ACI_URL}:8080/getMentors`)
         .then(data => data.json())
         .then(json => {
             fetchedMentors = json;
