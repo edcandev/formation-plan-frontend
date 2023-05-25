@@ -2,7 +2,6 @@ import {  ComponentResponse } from '../types'
 import useFetch from '../hooks/useFetch';
 import useUploadFile from '../hooks/useUploadFile';
 
-//const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
 
 type Props = {
   handleChange: ( cc : ComponentResponse) => ComponentResponse
@@ -20,7 +19,7 @@ const UploadComponent = ( {handleChange } : Props  ) => {
   }
 
   return (
-    <div className="container p-4 main-container">
+    <div className="container mt-5 m-auto p-5 main-container upload-component-container">
       
       <label htmlFor="select-mentor">Mentor:</label>
       <select className='form-select my-3'  name="select-mentor" id="select-mentor" onClick={

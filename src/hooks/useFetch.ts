@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { IEMentor } from "../types";
+import { getAPI_URL } from "../env/apiUrlHelper";
 
 
-const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
-//const ACI_URL = 'http://localhost'
+//const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
+
+const env : string = 'prod'
+const ACI_URL = getAPI_URL(env)
+
 const useFetch = () => {
 
     const [mentors, setMentors] = useState<Array<IEMentor>>([])

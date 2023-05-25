@@ -1,6 +1,9 @@
+import { getAPI_URL } from "../env/apiUrlHelper";
 import { ComponentResponse, StudentExcelResponse } from "../types";
 
-const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
+//const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
+const env : string = 'prod'
+const ACI_URL = getAPI_URL(env)
 
 type Props = {
     handleChange: ( cc : ComponentResponse) => ComponentResponse

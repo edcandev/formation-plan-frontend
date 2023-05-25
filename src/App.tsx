@@ -33,7 +33,7 @@ function App() {
       case 1:
         return( 
           <>
-                <UploadComponent handleChange={handlePlanPreviewRender}/>
+                { /*<UploadComponent handleChange={handlePlanPreviewRender}/>*/}
                 <PlanPreviewComponent studentExcelData={currentComponent.response as StudentExcelResponse} handleChange={handlePlanPreviewRender}/>
           </>)
       case 2:

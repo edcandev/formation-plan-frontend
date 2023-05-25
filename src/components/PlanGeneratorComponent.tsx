@@ -1,8 +1,9 @@
+import { getAPI_URL } from '../env/apiUrlHelper'
 import { PlanGenerationRequestBody, StudentExcelResponse, ComponentResponse, PlanGeneratorResponse } from '../types'
+//const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
 
-// const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
-
-const ACI_URL = 'http://localhost'
+const env : string = 'prod'
+const ACI_URL = getAPI_URL(env)
 
 type Props = {
     studentExcelData? : StudentExcelResponse,
@@ -13,14 +14,14 @@ const PlanPreviewComponent = ({studentExcelData, handleChange} : Props) => {
 
 
   return (
-    <div className='mx-4'>
+    <div className=' my-5 container'>
         <h2>Asignaturas Registradas:</h2>
         <p><strong>Alumno:</strong> {studentExcelData?.firstSurname}{' '}{studentExcelData?.lastSurname} {studentExcelData?.name}</p>
         <p><strong>Matrícula:</strong> {studentExcelData?.studentId}</p>
 
         <table className='table table-hover'>
             <thead className=''>
-                <tr >
+                <tr>
                     <th className='col-2'>Clave de materia</th>
                     <th className='text-center'>Nombre de materia</th>
                     <th>Periodo</th>
@@ -45,7 +46,7 @@ const PlanPreviewComponent = ({studentExcelData, handleChange} : Props) => {
                 
             </tbody>
         </table>
-        <form onSubmit={e => handlePlanGeneration(e, studentExcelData!, handleChange)}>
+        <form className='plan-generator-component-form' onSubmit={e => handlePlanGeneration(e, studentExcelData!, handleChange)}>
             <label htmlFor="generation-date-input">Fecha de creación del plan de formación:</label>
             <input required type="date" className='generation-date-input' name='generation-date-input'/>
             <label htmlFor="period-input">Periodo:</label>

@@ -30,3 +30,14 @@
     padding: 5px;
     background-color: #63c184;
 }
+
+/* HEADER COMPONENT */
+
+.header-component-container {
+    display: flex;
+    background-color: #117333;
+}
+
+.header-component-container-h1 {
+    color: #fff;
+}
