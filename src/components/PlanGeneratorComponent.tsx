@@ -2,8 +2,8 @@ import { getAPI_URL } from '../env/apiUrlHelper'
 import { PlanGenerationRequestBody, StudentExcelResponse, ComponentResponse, PlanGeneratorResponse } from '../types'
 //const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
 
-const env : string = 'prod'
-const ACI_URL = getAPI_URL(env)
+//const env : string = 'prod'
+const ACI_URL = getAPI_URL('dev')
 
 type Props = {
     studentExcelData? : StudentExcelResponse,
@@ -81,7 +81,7 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
     /*  Handle await component*/
     alert('Generando plan de formación...')
 
-    const response = await fetch(  `${ACI_URL}:8080/generatePlan`,
+    const response = await fetch(  `${ACI_URL}/generatePlan`,
     {
         method: 'POST',
         body: JSON.stringify(reqBody),
@@ -120,9 +120,13 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
 }
 
 const formatDate = ( localeDate : string ) : string => {
+
+    console.log(localeDate);
+
     const splitedDate : Array<string> = localeDate.split('-');
     splitedDate.reverse();
-    return splitedDate.join('/')
+    return '08/11/2023'
+    // return splitedDate.join('/')
 }
 
 export default PlanPreviewComponent

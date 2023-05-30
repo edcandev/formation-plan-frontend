@@ -3,10 +3,9 @@ import { IEMentor } from "../types";
 import { getAPI_URL } from "../env/apiUrlHelper";
 
 
-//const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
 
-const env : string = 'prod'
-const ACI_URL = getAPI_URL(env)
+// const env : string = 'prod'
+const ACI_URL = getAPI_URL('dev')
 
 const useFetch = () => {
 
@@ -16,7 +15,7 @@ const useFetch = () => {
         
         let fetchedMentors : Array<IEMentor>;
         
-        fetch(`${ACI_URL}:8080/getMentors`)
+        fetch(`${ACI_URL}/getMentors`)
         .then(data => data.json())
         .then(json => {
             fetchedMentors = json;

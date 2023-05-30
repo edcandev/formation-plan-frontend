@@ -2,8 +2,8 @@ import { getAPI_URL } from "../env/apiUrlHelper";
 import { ComponentResponse, StudentExcelResponse } from "../types";
 
 //const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
-const env : string = 'prod'
-const ACI_URL = getAPI_URL(env)
+// const env : string = 'prod'
+const ACI_URL = getAPI_URL('dev')
 
 type Props = {
     handleChange: ( cc : ComponentResponse) => ComponentResponse
@@ -29,7 +29,7 @@ const useUploadFile = () => {
             formData.append("file", selectedFile);
             formData.append('mentor',mentorSelectElement!.value);
       
-            const urlLink = `${ACI_URL}:8080/uploadFile`;
+            const urlLink = `${ACI_URL}/uploadFile`;
         
             const response = await fetch(urlLink,
             {

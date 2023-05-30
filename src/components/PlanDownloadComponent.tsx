@@ -1,8 +1,8 @@
 import { getAPI_URL } from '../env/apiUrlHelper'
 import { ComponentResponse, PlanGeneratorResponse } from '../types'
 
-const env : string = 'prod'
-const ACI_URL = getAPI_URL(env)
+//const env : string = 'prod'
+const ACI_URL = getAPI_URL('dev')
 
 type Props = {
   planGeneratorResponse : PlanGeneratorResponse,
@@ -17,7 +17,7 @@ const PlanDownloadComponent = ({planGeneratorResponse, handleChange} : Props) =>
   }
 
   const getCompleteDownloadLink = () => {
-    return `${ACI_URL}:8080/downloadPlan/${planGeneratorResponse?.studentId}.zip`
+    return `${ACI_URL}/downloadPlan/${planGeneratorResponse?.studentId}.zip`
   }
 
   return (
@@ -31,10 +31,10 @@ const PlanDownloadComponent = ({planGeneratorResponse, handleChange} : Props) =>
       <button className='btn btn-secondary' onClick={backToHome} >Generar otro plan de formación</button>
       </div>
     </div>
-    <div className='loading-component'>
+    {/* <div className='loading-component'>
       CARGANDO...
       <img className='loading-component-perrito-asu' src="/perrito_asu.png" alt="" />
-    </div>
+    </div> */}
     </>
   )
 }
