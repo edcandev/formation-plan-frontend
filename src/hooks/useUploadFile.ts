@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { getAPI_URL } from "../env/apiUrlHelper";
 import { ComponentResponse, StudentExcelResponse } from "../types";
 
@@ -50,22 +51,63 @@ const useUploadFile = () => {
                     }
                     handleChange(componentResponse);
                     });
-                    alert('El archivo ha sido cargado');
+
+                    Swal.fire(
+                        {
+                            title: 'Archivo Cargado',
+                            text: '¡El archivo ha sido cargado exitosamente!',
+                            icon: 'success',
+                            confirmButtonColor:'#198754',
+                    });
+
+                    //alert('El archivo ha sido cargado');
+
+
+
                     break;
                 case 403:
-                    alert('El mentor no puede generar el plan del alumno');
+                    //alert('El mentor no puede generar el plan del alumno');
+
+                    Swal.fire(
+                        {
+                            title: 'Error!',
+                            text: 'El mentor no puede generar el plan para el alumno.',
+                            icon: 'error',
+                            confirmButtonColor:'#FF0000'
+                    });
                     break;
+
                 case 400:
-                    alert('El archivo es incorrecto');
+                    //alert('El archivo es incorrecto');
+                    Swal.fire(
+                        {
+                            title: 'Error!',
+                            text: 'Se encontró un error en la cédula.',
+                            icon: 'error',
+                            confirmButtonColor:'#FF0000'
+                    });
                     break;
+
             }
           } else {
-              console.log("No hay archivo");
-              alert("Por favor, seleccione un archivo.");
+            
+            Swal.fire(
+                {
+                    title: 'Error!',
+                    text: 'Por favor, seleccione un archivo.',
+                    icon: 'error',
+                    confirmButtonColor:'#FF0000'
+            });
           }
       
         } else {
-          alert('Por favor, seleccione un mentor.')
+            Swal.fire(
+            {
+                title: 'Error!',
+                text: 'Por favor, seleccione un mentor.',
+                icon: 'error',
+                confirmButtonColor:'#FF0000'
+            });
         }
     }
 

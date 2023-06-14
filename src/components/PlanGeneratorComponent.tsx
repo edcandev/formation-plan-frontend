@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import { getAPI_URL } from '../env/apiUrlHelper'
 import { PlanGenerationRequestBody, StudentExcelResponse, ComponentResponse, PlanGeneratorResponse } from '../types'
 //const ACI_URL = 'http://formationplanbackend.cgb2gegzehhzg2ak.westus.azurecontainer.io';
@@ -67,7 +68,15 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
     // console.log(generationDateInput.value);
 
     if(! studentExcelData.subjectList.every( subject => subject.valid)) {
-        alert('La cédula no es válida')
+        //alert('La cédula no es válida')
+        Swal.fire(
+            {
+                title: 'Error!',
+                text: '¡La cédula no es válida!',
+                icon: 'error',
+                confirmButtonColor:'#FF0000'
+        });
+
         return;
     }
 
@@ -79,7 +88,18 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
     }
 
     /*  Handle await component*/
-    alert('Generando plan de formación...')
+    //alert('Generando plan de formación...)
+    
+    
+    Swal.fire(
+        {
+            title:'Por favor, espere...',
+            text:'Se está generando el plan de formación',
+            timer: 10000,
+            timerProgressBar: true,
+
+        })
+
 
     const response = await fetch(  `${ACI_URL}/generatePlan`,
     {
