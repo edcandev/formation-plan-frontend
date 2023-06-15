@@ -2,7 +2,7 @@ import HeaderComponent from './components/HeaderComponent';
 import UploadComponent from './components/UploadComponent';
 import PlanPreviewComponent from './components/PlanGeneratorComponent';
 import ProgressComponent from './components/ProgressComponent';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PlanDownloadComponent from './components/PlanDownloadComponent';
 
 import { StudentExcelResponse, ComponentResponse, PlanGeneratorResponse } from './types';
