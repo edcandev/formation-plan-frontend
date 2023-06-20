@@ -13,7 +13,13 @@ type Props = {
 const PlanDownloadComponent = ({planGeneratorResponse, handleChange} : Props) => {
 
   const backToHome = () => {
+    console.log("jeee");
     handleChange({currentComponent:0})
+
+    
+
+
+
   }
 
   const getCompleteDownloadLink = () => {

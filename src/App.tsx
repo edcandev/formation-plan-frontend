@@ -1,6 +1,7 @@
 import HeaderComponent from './components/HeaderComponent';
 import UploadComponent from './components/UploadComponent';
 import PlanPreviewComponent from './components/PlanGeneratorComponent';
+import ProgressComponent from './components/ProgressComponent';
 import { useState } from 'react';
 import PlanDownloadComponent from './components/PlanDownloadComponent';
 
@@ -16,10 +17,6 @@ function App() {
     return cc;
   }
 
-  
-
-
-
   const renderCurrentState = () : JSX.Element | void =>  {
 
     switch(currentComponent.currentComponent) {
@@ -27,18 +24,28 @@ function App() {
 
       case 0:
         return(
-          <UploadComponent handleChange={handlePlanPreviewRender}/>
+          <>
+            <ProgressComponent
+              currentComponent={currentComponent}
+            />
+            <UploadComponent handleChange={handlePlanPreviewRender}/>
+          </>
         )
 
       case 1:
-        return( 
+        return(
           <>
-                { /*<UploadComponent handleChange={handlePlanPreviewRender}/>*/}
-                <PlanPreviewComponent studentExcelData={currentComponent.response as StudentExcelResponse} handleChange={handlePlanPreviewRender}/>
+            <ProgressComponent
+              currentComponent={currentComponent}
+            />
+            <PlanPreviewComponent studentExcelData={currentComponent.response as StudentExcelResponse} handleChange={handlePlanPreviewRender}/>
           </>)
       case 2:
         return(
           <>
+            <ProgressComponent
+              currentComponent={currentComponent}
+            />
             <PlanDownloadComponent planGeneratorResponse={currentComponent.response as PlanGeneratorResponse} handleChange={handlePlanPreviewRender}/>
           </>
         )
