@@ -60,24 +60,30 @@ const ProgressComponent = ( { currentComponent }: Props) => {
     fontSize: '2em'
   }
 
+  const succededStepCircleStyle = {
+    backgroundColor: '#F27405',
+    color:'#FFF',
+    fontSize: '2em'
+  }
+
   return (
     <div style={mainContainerStyle}>
       <div className='container py-4 d-flex justify-content-around'>
         <div
-          style={stepCircleStyle}
-          className={progressColor.stepOne ? 'p-4 rounded-5 px-5 bg-primary' : 'p-4 rounded-5 px-5'}>
+          style={progressColor.stepOne ? succededStepCircleStyle : stepCircleStyle}
+          className={progressColor.stepOne ? 'p-4 rounded-5 px-5  ' : 'p-4 rounded-5 px-5'}>
           1
         </div>
 
         <div
-          style={stepCircleStyle}
-          className={progressColor.stepTwo ? 'p-4 rounded-5 px-5 bg-primary' : 'p-4 rounded-5 px-5'}>
+          style={progressColor.stepTwo ? succededStepCircleStyle : stepCircleStyle}
+          className={progressColor.stepTwo ? 'p-4 rounded-5 px-5 procceded' : 'p-4 rounded-5 px-5'}>
           2
         </div>
 
         <div
-          style={stepCircleStyle}
-          className={progressColor.stepThree ? 'p-4 rounded-5 px-5 bg-primary' : 'p-4 rounded-5 px-5'}>
+          style={progressColor.stepThree ? succededStepCircleStyle : stepCircleStyle}
+          className={progressColor.stepThree ? 'p-4 rounded-5 px-5 procceded' : 'p-4 rounded-5 px-5'}>
           3
         </div>
 

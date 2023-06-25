@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #aaa;
+    background-color: #024059;
 }
 
 .header-component-container-div {
@@ -12,13 +12,13 @@
 
 .header-component-container-h1 {
     display: inline-block;
-    color: #000000;
+    color: #ffffff;
     text-align: center;
     width: 75%;
 }
 .header-component-container-h2 {
     display: inline-block;
-    color: #000000;
+    color: #ffffff;
     text-align: center;
     width: 75%;
 }
@@ -26,8 +26,19 @@
 .header-component-container-img {
     width: 150px;
     aspect-ratio: 1 / 1;
-    background-color: #fff;
+
+    filter: invert(1);
+    /* or to blue */
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
 }
+
+.header-component-container-img-tecnm-logo {
+    height: 150px;
+    /*aspect-ratio: 1 / 1;*/
+}
+
+
+    /*background-color: #fff;*/
 .upload-component-container {
     background-color: #ccc;
     border-radius: 10px;
