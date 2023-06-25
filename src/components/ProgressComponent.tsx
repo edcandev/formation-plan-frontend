@@ -57,7 +57,7 @@ const ProgressComponent = ( { currentComponent }: Props) => {
   const stepCircleStyle = {
     backgroundColor: '#333',
     color:'#FFF',
-    fontSize: '2em'
+    fontSize: '1.3em'
   }
 
   return (
