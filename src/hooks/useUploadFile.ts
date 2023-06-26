@@ -17,6 +17,8 @@ const useUploadFile = () => {
         const fileupload = document.querySelector<HTMLInputElement>('#fileupload');
       
         const mentorSelectElement = document.querySelector<HTMLSelectElement>('#select-mentor');
+        //document.createElement("div").classList.add("select-mentor");
+        //const mentorSelectElement = document.querySelector<HTMLSelectElement>('.select-mentor');
          // console.log(mentorSelectElement!.value);
       
         let selectedFile;
