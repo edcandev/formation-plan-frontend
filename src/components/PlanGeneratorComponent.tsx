@@ -124,7 +124,7 @@ const handlePlanGeneration = async (ev : React.FormEvent<HTMLFormElement>, stude
         console.log(planGeneratorResponse);
 
         if(! planGeneratorResponse.wasGenerated) {
-            alert('PLan no generado, erro en la cédula')
+            alert('Plan no generado, error en la cédula')
             return;
         }
         
