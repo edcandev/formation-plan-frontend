@@ -25,20 +25,11 @@
 }
 
 .header-component-container-img {
-<<<<<<< HEAD
-    width: 150px;
-    aspect-ratio: 1 / 1;
-
-    filter: invert(1);
-    /* or to blue */
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
-=======
     width: 400px;
     height: 180px;
     object-fit: contain;
     display: inline-block;
     margin: 0 auto;
->>>>>>> b2ade02e7e15a3265289cfc7dc6e4582b48c3bda
 }
 
 .header-component-container-img-tecnm-logo {
@@ -47,9 +38,6 @@
 }
 
 
-<<<<<<< HEAD
-    /*background-color: #fff;*/
-=======
 @media (max-width: 400px) {
     .header-component-container-h1,
     .header-component-container-img {
@@ -81,7 +69,6 @@
     
 }
 
->>>>>>> b2ade02e7e15a3265289cfc7dc6e4582b48c3bda
 .upload-component-container {
     background-color: #ccc;
     border-radius: 10px;
