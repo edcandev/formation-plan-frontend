@@ -47,7 +47,7 @@ const ProgressComponent = ( { currentComponent }: Props) => {
         break;
     }
 
-  })
+  },[]);
   
 
   const mainContainerStyle = {

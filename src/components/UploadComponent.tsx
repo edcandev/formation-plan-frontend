@@ -1,5 +1,4 @@
 import {  ComponentResponse } from '../types'
-import useFetch from '../hooks/useFetch';
 import useUploadFile from '../hooks/useUploadFile';
 
 
@@ -10,26 +9,27 @@ type Props = {
 
 const UploadComponent = ( {handleChange } : Props  ) => {
 
-  const { mentors } = useFetch();
+  // const { mentors } = useFetch();
   const { uploadFile } = useUploadFile();
 
+  /*
   const handleSelect = ():void=> {
     const optionDisabled = document.querySelector('option');
     optionDisabled!.disabled = true;
-  }
+  }*/
 
   return (
     <div className="container mt-5 m-auto p-5 main-container upload-component-container">
       
       <label htmlFor="select-mentor">Mentor:</label>
-      <select className='form-select my-3'  name="select-mentor" id="select-mentor" onClick={
+      {/*<select className='form-select my-3'  name="select-mentor" id="select-mentor" onClick={
         () => { handleSelect()}} >
         <option value="disabled">Seleccionar mentor</option>
 
         {mentors.map(mentor =>(
           <option key={mentor.fullName} value={mentor.fullName}>{mentor.fullName}</option>
         ))}
-      </select>
+        </select>*/}
 
       <input className='d-flex mb-3 w-100 align-items-center file-input form-input'  
       id="fileupload" type="file" name="fileupload" accept='.xls,.xlsx'/>

@@ -30,7 +30,9 @@ const useUploadFile = () => {
             selectedFile = fileupload.files[0]
             const formData : FormData = new FormData(); 
             formData.append("file", selectedFile);
-            formData.append('mentor',mentorSelectElement!.value);
+
+            // No se agrega mentor porque no se puede ingresar
+            // formData.append('mentor',mentorSelectElement!.value);
       
             const urlLink = `${ACI_URL}/uploadFile`;
         

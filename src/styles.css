@@ -7,7 +7,8 @@
 }
 
 .header-component-container-div {
-    width: 75%;
+    width: 100%;
+    display: block;
 }
 
 .header-component-container-h1 {
@@ -24,12 +25,11 @@
 }
 
 .header-component-container-img {
-    width: 150px;
-    aspect-ratio: 1 / 1;
-
-    filter: invert(1);
-    /* or to blue */
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+    width: 400px;
+    height: 180px;
+    object-fit: contain;
+    display: inline-block;
+    margin: 0 auto;
 }
 
 .header-component-container-img-tecnm-logo {
@@ -38,7 +38,37 @@
 }
 
 
-    /*background-color: #fff;*/
+@media (max-width: 400px) {
+    .header-component-container-h1,
+    .header-component-container-img {
+        width: 110px; /* Ajusta el tamaño de la imagen para resoluciones menores a 400px */
+    }
+    .header-component-container-h2{
+        display: none;
+    }
+    .step-circle {
+        font-size: 1.5em; /* Tamaño reducido para resoluciones menores a 400px */
+        padding: 2px 3px; /* Ajusta los valores de padding según tus necesidades */
+        border-radius: 3px; /* Ajusta el valor de border-radius según tus necesidades */
+      }
+}
+
+.banner-component-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #024059;
+}
+
+.banner-component-container-img {
+    width: 1900px;
+    height: 220px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background-color: #024059;
+    
+}
+
 .upload-component-container {
     background-color: #ccc;
     border-radius: 10px;
